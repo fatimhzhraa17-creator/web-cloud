@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudVerse — Platform Cloud Computing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ink: #0d1117;
+            --ink-soft: #3a3f4a;
+            --ink-muted: #7a8294;
+            --cream: #f7f4ef;
+            --surface: #ffffff;
+            --accent: #1a56db;
+            --accent-soft: #e8effe;
+            --accent-2: #0e9f6e;
+            --gold: #c4952a;
+            --gold-soft: #fef3da;
+            --border: rgba(0,0,0,0.08);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(247,244,239,0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            height: 68px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg { width: 20px; height: 20px; fill: white; }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--ink);
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ink-soft);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .nav-cta {
+            background: var(--ink) !important;
+            color: white !important;
+            padding: 9px 22px;
+            border-radius: 8px;
+            font-weight: 500 !important;
+            transition: background 0.2s, transform 0.15s !important;
+        }
+
+        .nav-cta:hover { background: #1a2030 !important; transform: translateY(-1px); }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 100px 5% 80px;
+            gap: 60px;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 28px;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.8); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 4vw, 3.6rem);
+            font-weight: 700;
+            line-height: 1.12;
+            letter-spacing: -0.025em;
+            color: var(--ink);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--ink-soft);
+            line-height: 1.75;
+            max-width: 480px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 14px rgba(26,86,219,0.3);
+        }
+
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,86,219,0.35); }
+
+        .btn-ghost {
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+        }
+
+        .btn-ghost:hover { color: var(--ink); }
+
+        .btn-ghost svg { width: 18px; height: 18px; }
+
+        /* Hero visual */
+        .hero-visual {
+            position: relative;
+        }
+
+        .cloud-diagram {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cloud-diagram::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: -40px;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(26,86,219,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .diagram-title {
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            margin-bottom: 32px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .service-chip {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 12px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: default;
+        }
+
+        .service-chip:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        .service-chip .icon {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .service-chip .label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--ink-soft);
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .metric {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .metric-val {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ink);
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 0.72rem;
+            color: var(--ink-muted);
+            margin-top: 2px;
+        }
+
+        .uptime-bar {
+            background: #e4e8ef;
+            height: 4px;
+            border-radius: 100px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .uptime-fill {
+            height: 100%;
+            border-radius: 100px;
+            background: var(--accent-2);
+            width: 99.9%;
+        }
+
+        /* ── SECTION BASE ── */
+        section { padding: 100px 5%; }
+
+        .section-header {
+            max-width: 600px;
+            margin: 0 auto 64px;
+            text-align: center;
+        }
+
+        .section-tag {
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.9rem, 3vw, 2.6rem);
+            font-weight: 700;
+            line-height: 1.18;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            font-size: 1rem;
+            color: var(--ink-soft);
+            line-height: 1.75;
+            font-weight: 300;
+        }
+
+        /* ── WHAT IS CLOUD ── */
+        .about-section {
+            background: var(--surface);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: 24px;
+        }
+
+        .about-text h2 em { font-style: italic; color: var(--accent); }
+
+        .about-text p {
+            font-size: 1rem;
+            color: var(--ink-soft);
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-weight: 300;
+        }
+
+        .about-text .highlight-box {
+            margin-top: 32px;
+            background: var(--gold-soft);
+            border-left: 3px solid var(--gold);
+            border-radius: 0 12px 12px 0;
+            padding: 20px 24px;
+        }
+
+        .highlight-box p {
+            color: #7a5c10;
+            font-style: italic;
+            margin-bottom: 0;
+            font-weight: 400;
+        }
+
+        .about-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .layer-card {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .layer-card:hover { transform: translateX(6px); box-shadow: var(--shadow-sm); }
+
+        .layer-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .layer-icon.blue { background: var(--accent-soft); }
+        .layer-icon.green { background: #d1fae5; }
+        .layer-icon.gold { background: var(--gold-soft); }
+
+        .layer-info h4 {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .layer-info p {
+            font-size: 0.82rem;
+            color: var(--ink-muted);
+            line-height: 1.5;
+        }
+
+        /* ── ADVANTAGES ── */
+        .advantages-section {
+            background: var(--cream);
+        }
+
+        .adv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .adv-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px 32px;
+            transition: transform 0.25s, box-shadow 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .adv-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .adv-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        .adv-card:hover::after { transform: scaleX(1); }
+
+        .adv-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: rgba(26,86,219,0.08);
+            line-height: 1;
+            margin-bottom: 20px;
+            letter-spacing: -0.04em;
+        }
+
+        .adv-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+
+        .adv-card h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .adv-card p {
+            font-size: 0.88rem;
+            color: var(--ink-muted);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ── SERVICE MODELS ── */
+        .models-section {
+            background: var(--ink);
+            color: white;
+        }
+
+        .models-section .section-title { color: white; }
+        .models-section .section-desc { color: rgba(255,255,255,0.5); }
+        .models-section .section-tag { color: #6b9bfa; }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.06);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        .model-panel {
+            background: transparent;
+            padding: 48px 40px;
+            transition: background 0.3s;
+            cursor: default;
+            position: relative;
+        }
+
+        .model-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.04);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .model-panel:hover::before { opacity: 1; }
+
+        .model-badge {
+            display: inline-block;
+            background: rgba(107,155,250,0.15);
+            color: #6b9bfa;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 6px;
+            margin-bottom: 28px;
+        }
+
+        .model-panel h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .model-panel p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.75;
+            font-weight: 300;
+            margin-bottom: 28px;
+        }
+
+        .model-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .ex-pill {
+            background: rgba(255,255,255,0.07);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.75rem;
+            padding: 5px 12px;
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* ── DEPLOYMENT ── */
+        .deploy-section {
+            background: var(--surface);
+        }
+
+        .deploy-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .deploy-timeline::before {
+            content: '';
+            position: absolute;
+            left: 36px;
+            top: 0; bottom: 0;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .deploy-step {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .step-dot {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--cream);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .deploy-step:first-child .step-dot {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 16px;
+        }
+
+        .step-content h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            font-size: 0.88rem;
+            color: var(--ink-muted);
+            line-height: 1.65;
+            font-weight: 300;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--ink);
+            color: rgba(255,255,255,0.5);
+            padding: 60px 5%;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-brand .logo-text { color: white; font-size: 1.1rem; }
+
+        .footer-brand p {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.35);
+            margin-top: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: white; }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.25);
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-content > * {
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+        .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+        .hero-content > *:nth-child(3) { animation-delay: 0.3s; }
+        .hero-content > *:nth-child(4) { animation-delay: 0.4s; }
+
+        .hero-visual { animation: fadeUp 0.8s 0.35s ease both; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 960px) {
+            .hero { grid-template-columns: 1fr; padding-top: 120px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .models-grid { grid-template-columns: 1fr; }
+            .model-panel { padding: 36px 28px; }
+            nav { padding: 0 4%; }
+            .nav-links { gap: 20px; }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
+            .service-grid { grid-template-columns: repeat(2, 1fr); }
+            .metrics-row { grid-template-columns: 1fr; }
+            .hero { padding: 100px 5% 60px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="#" class="logo">
+        <div class="logo-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 10a6 6 0 1 0-11.8 1.5A5 5 0 1 0 8 21h10a4 4 0 0 0 0-8h-.2A6 6 0 0 0 18 10z"/></svg>
+        </div>
+        <span class="logo-text">CloudVerse</span>
+    </a>
+    <ul class="nav-links">
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#layanan">Layanan</a></li>
+        <li><a href="#model">Model</a></li>
+        <li><a href="#kontak" class="nav-cta">Kontak Kami</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="max-width:1400px;margin:0 auto;padding-left:8%;padding-right:8%;">
+    <div class="hero-content">
+        <div class="hero-tag">Teknologi Masa Depan</div>
+        <h1>Infrastruktur <em>Cerdas</em> untuk Era Digital</h1>
+        <p class="hero-desc">Cloud computing memungkinkan bisnis Anda tumbuh tanpa batas — akses sumber daya komputasi kapan saja, di mana saja, dengan efisiensi dan keamanan tertinggi.</p>
+        <div class="hero-actions">
+            <a href="#tentang" class="btn-primary">Pelajari Lebih Lanjut</a>
+            <a href="#model" class="btn-ghost">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>
+                </svg>
+                Lihat Model Layanan
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="cloud-diagram">
+            <p class="diagram-title">Infrastruktur Live</p>
+            <div class="service-grid">
+                <div class="service-chip"><span class="icon">🖥️</span><span class="label">Compute</span></div>
+                <div class="service-chip"><span class="icon">💾</span><span class="label">Storage</span></div>
+                <div class="service-chip"><span class="icon">🌐</span><span class="label">Network</span></div>
+                <div class="service-chip"><span class="icon">🔒</span><span class="label">Security</span></div>
+                <div class="service-chip"><span class="icon">📊</span><span class="label">Analytics</span></div>
+                <div class="service-chip"><span class="icon">🤖</span><span class="label">AI/ML</span></div>
+            </div>
+            <div class="metrics-row">
+                <div class="metric">
+                    <span class="metric-val">99.9%</span>
+                    <p class="metric-label">Uptime</p>
+                    <div class="uptime-bar"><div class="uptime-fill"></div></div>
+                </div>
+                <div class="metric">
+                    <span class="metric-val">200+</span>
+                    <p class="metric-label">Layanan</p>
+                </div>
+                <div class="metric">
+                    <span class="metric-val">40ms</span>
+                    <p class="metric-label">Latensi</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TENTANG -->
+<section id="tentang" class="about-section">
+    <div class="about-grid">
+        <div class="about-text">
+            <p style="font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;">Apa itu Cloud?</p>
+            <h2>Komputasi <em>Tanpa Batas</em> Lewat Internet</h2>
+            <p>Cloud computing adalah model penyampaian layanan komputasi — termasuk server, penyimpanan, database, jaringan, perangkat lunak, analitik, dan kecerdasan buatan — melalui internet untuk menawarkan inovasi yang lebih cepat, sumber daya yang fleksibel, dan skala ekonomi.</p>
+            <p>Pengguna hanya membayar untuk layanan cloud yang mereka gunakan, yang membantu mengurangi biaya operasional, menjalankan infrastruktur mereka dengan lebih efisien, dan skala sesuai kebutuhan bisnis.</p>
+            <div class="highlight-box">
+                <p>"Cloud computing bukan masa depan — ini adalah fondasi dari setiap inovasi digital yang terjadi hari ini."</p>
+            </div>
+        </div>
+        <div class="about-visual">
+            <div class="layer-card">
+                <div class="layer-icon blue">🏗️</div>
+                <div class="layer-info">
+                    <h4>Infrastruktur (IaaS)</h4>
+                    <p>Server virtual, penyimpanan, dan jaringan yang dapat dikonfigurasi sesuai kebutuhan spesifik Anda.</p>
+                </div>
+            </div>
+            <div class="layer-card">
+                <div class="layer-icon green">⚙️</div>
+                <div class="layer-info">
+                    <h4>Platform (PaaS)</h4>
+                    <p>Lingkungan pengembangan lengkap di cloud — bangun, uji, dan deploy aplikasi tanpa mengelola infrastruktur.</p>
+                </div>
+            </div>
+            <div class="layer-card">
+                <div class="layer-icon gold">📱</div>
+                <div class="layer-info">
+                    <h4>Perangkat Lunak (SaaS)</h4>
+                    <p>Aplikasi siap pakai yang diakses melalui browser — tidak perlu instalasi atau pemeliharaan lokal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section id="layanan" class="advantages-section">
+    <div class="section-header">
+        <p class="section-tag">Mengapa Cloud?</p>
+        <h2 class="section-title">Keunggulan yang Mengubah Cara Bisnis Bekerja</h2>
+        <p class="section-desc">Dari startup hingga enterprise, cloud computing memberikan keunggulan kompetitif yang nyata dan terukur.</p>
+    </div>
+    <div class="adv-grid">
+        <div class="adv-card">
+            <div class="adv-number">01</div>
+            <div class="adv-icon blue" style="background:var(--accent-soft);">💰</div>
+            <h3>Efisiensi Biaya</h3>
+            <p>Tidak ada modal awal untuk hardware. Bayar hanya untuk apa yang Anda gunakan, kapan Anda menggunakannya — model pay-as-you-go yang transparan.</p>
+        </div>
+        <div class="adv-card">
+            <div class="adv-number">02</div>
+            <div class="adv-icon" style="background:#d1fae5;">📈</div>
+            <h3>Skalabilitas Dinamis</h3>
+            <p>Skala naik saat trafik melonjak, skala turun saat sepi. Infrastruktur Anda tumbuh seiring bisnis — otomatis dan instan.</p>
+        </div>
+        <div class="adv-card">
+            <div class="adv-number">03</div>
+            <div class="adv-icon" style="background:var(--gold-soft);">🌍</div>
+            <h3>Aksesibilitas Global</h3>
+            <p>Tim Anda bisa bekerja dari mana saja di dunia. Data dan aplikasi tersedia 24/7 melalui koneksi internet apapun.</p>
+        </div>
+        <div class="adv-card">
+            <div class="adv-number">04</div>
+            <div class="adv-icon" style="background:#fce7f3;">🛡️</div>
+            <h3>Keamanan Enterprise</h3>
+            <p>Enkripsi berlapis, audit trail lengkap, dan kepatuhan regulasi (ISO, SOC2, GDPR) yang ditangani oleh tim ahli keamanan.</p>
+        </div>
+        <div class="adv-card">
+            <div class="adv-number">05</div>
+            <div class="adv-icon" style="background:#ede9fe;">⚡</div>
+            <h3>Kecepatan Inovasi</h3>
+            <p>Deploy aplikasi dalam hitungan menit. Eksperimen dengan teknologi baru tanpa risiko finansial besar — gagal cepat, belajar cepat.</p>
+        </div>
+        <div class="adv-card">
+            <div class="adv-number">06</div>
+            <div class="adv-icon" style="background:#ecfdf5;">♻️</div>
+            <h3>Keberlangsungan Bisnis</h3>
+            <p>Backup otomatis, disaster recovery, dan redundansi multi-region memastikan bisnis Anda tetap berjalan bahkan dalam kondisi darurat.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICE MODELS -->
+<section id="model" class="models-section">
+    <div class="section-header">
+        <p class="section-tag">Model Layanan</p>
+        <h2 class="section-title">Tiga Pilar Cloud Computing</h2>
+        <p class="section-desc">Setiap model dirancang untuk kebutuhan yang berbeda — pilih yang paling sesuai dengan strategi digital Anda.</p>
+    </div>
+    <div class="models-grid">
+        <div class="model-panel">
+            <span class="model-badge">IaaS</span>
+            <h3>Infrastructure as a Service</h3>
+            <p>Sewa infrastruktur IT dasar — server, storage, dan networking — melalui internet. Kendali penuh di tangan Anda.</p>
+            <div class="model-examples">
+                <span class="ex-pill">AWS EC2</span>
+                <span class="ex-pill">Google Compute</span>
+                <span class="ex-pill">Azure VMs</span>
+            </div>
+        </div>
+        <div class="model-panel">
+            <span class="model-badge">PaaS</span>
+            <h3>Platform as a Service</h3>
+            <p>Platform lengkap untuk develop, run, dan manage aplikasi tanpa perlu mengelola infrastruktur di bawahnya.</p>
+            <div class="model-examples">
+                <span class="ex-pill">Heroku</span>
+                <span class="ex-pill">Google App Engine</span>
+                <span class="ex-pill">Azure PaaS</span>
+            </div>
+        </div>
+        <div class="model-panel">
+            <span class="model-badge">SaaS</span>
+            <h3>Software as a Service</h3>
+            <p>Aplikasi siap pakai yang didelivery melalui internet. Tidak perlu instalasi — langsung pakai di browser.</p>
+            <div class="model-examples">
+                <span class="ex-pill">Google Workspace</span>
+                <span class="ex-pill">Microsoft 365</span>
+                <span class="ex-pill">Salesforce</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DEPLOYMENT GITHUB PAGES -->
+<section class="deploy-section">
+    <div class="section-header">
+        <p class="section-tag">Deployment</p>
+        <h2 class="section-title">Deploy ke GitHub Pages dalam 4 Langkah</h2>
+        <p class="section-desc">Publikasikan website Anda ke dunia secara gratis menggunakan GitHub Pages — platform hosting statis yang andal dari GitHub.</p>
+    </div>
+    <div class="deploy-timeline">
+        <div class="deploy-step">
+            <div class="step-dot" style="background:var(--accent);border-color:var(--accent);">
+                <span style="color:white;font-size:1rem;">1</span>
+            </div>
+            <div class="step-content">
+                <h4>Buat Repository di GitHub</h4>
+                <p>Login ke GitHub dan buat repository baru. Pastikan visibility diset ke "Public" agar GitHub Pages dapat diaktifkan secara gratis.</p>
+            </div>
+        </div>
+        <div class="deploy-step">
+            <div class="step-dot">2</div>
+            <div class="step-content">
+                <h4>Upload File Proyek Anda</h4>
+                <p>Push file HTML, CSS, dan JavaScript Anda ke repository. Pastikan file utama bernama <code style="background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:4px;font-size:0.82rem;">index.html</code> dan berada di root folder.</p>
+            </div>
+        </div>
+        <div class="deploy-step">
+            <div class="step-dot">3</div>
+            <div class="step-content">
+                <h4>Aktifkan GitHub Pages</h4>
+                <p>Masuk ke Settings → Pages → pilih branch "main" sebagai source. GitHub akan otomatis membangun dan men-deploy situs Anda.</p>
+            </div>
+        </div>
+        <div class="deploy-step" style="margin-bottom:0;">
+            <div class="step-dot">🚀</div>
+            <div class="step-content">
+                <h4>Website Anda Live!</h4>
+                <p>Dalam 1–2 menit, situs Anda dapat diakses di <code style="background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:4px;font-size:0.82rem;">username.github.io/repository-name</code> — gratis, dengan HTTPS, dan tersedia untuk seluruh dunia.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="kontak">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <div class="logo">
+                <div class="logo-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 10a6 6 0 1 0-11.8 1.5A5 5 0 1 0 8 21h10a4 4 0 0 0 0-8h-.2A6 6 0 0 0 18 10z"/></svg></div>
+                <span class="logo-text">CloudVerse</span>
+            </div>
+            <p>Tugas Cloud Computing — 2026</p>
+        </div>
+        <ul class="footer-links">
+            <li><a href="#tentang">Tentang</a></li>
+            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="#model">Model</a></li>
+        </ul>
+        <p class="footer-copy">© 2026 CloudVerse. Dibuat dengan ☁️</p>
+    </div>
+</footer>
+
+<script>
+    // Smooth nav highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(s => {
+            if (window.scrollY >= s.offsetTop - 100) current = s.id;
+        });
+        navLinks.forEach(a => {
+            a.style.color = a.getAttribute('href') === '#' + current
+                ? 'var(--accent)' : '';
+        });
+    });
+
+    // Intersection observer for card animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.style.opacity = '1';
+                e.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.adv-card, .layer-card, .model-panel, .deploy-step').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(el);
+    });
+</script>
+</body>
+</html>
